@@ -11,8 +11,10 @@ Vue.use(dataV)
 
 import VeLine from 'v-charts/lib/line.common'
 import VeHistogram from 'v-charts/lib/histogram.common'
+import VeFunnel from 'v-charts/lib/funnel.common'
 Vue.component(VeLine.name, VeLine)
 Vue.component(VeHistogram.name, VeHistogram)
+Vue.component(VeFunnel.name, VeFunnel)
 
 Vue.config.productionTip = false
 

@@ -4,7 +4,11 @@
       10日交易走势
       <dv-decoration-3 style="width:200px;height:20px;" />
     </div>
-    <ve-line class="line" :data="chartData" :extend="chartExtend" />
+    <ve-line
+      class="line"
+      :data="chartData"
+      :extend="chartExtend"
+    />
   </div>
 </template>
 
@@ -15,7 +19,7 @@ export default {
       legend: {
         left: '10',
         textStyle: {// 图例文字的样式
-          color: '#FFF',
+          color: '#EEE',
           fontSize: 16,
         },
       },
@@ -68,6 +72,7 @@ export default {
   position relative
   display inline-block
   box-sizing border-box
+  vertical-align top
   width 30%
   height 100%
   // background #68697a

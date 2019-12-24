@@ -36,6 +36,7 @@ export default {
     top 28px
     left 50%
     color rgb(248, 188, 56)
+    text-shadow: 0 0 5px #FFFFFF
     letter-spacing 8px
     font-weight bold
     font-size 34px

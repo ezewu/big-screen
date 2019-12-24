@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import echarts from 'echarts/lib/echarts'
+// import echarts from 'echarts/lib/echarts'
 export default {
   data() {
     this.chartExtend = {
       legend: {
         left: '30',
         textStyle: {// 图例文字的样式
-          color: '#FFF',
+          color: '#EEE',
           fontSize: 16,
         },
       },
@@ -44,35 +44,37 @@ export default {
           color: '#FFF',
         },
       },
-      'series.0.barWidth': 15,
-      'series.0.itemStyle.normal': {
-        // barBorderRadius: [15, 15, 15, 15],
-        barBorderRadius: 15,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 1, color: 'rgba(127, 128, 225, 0.7)',
-        }, {
-          offset: 0.9, color: 'rgba(72, 73, 181, 0.7)',
-        }, {
-          offset: 0.25, color: 'rgba(226, 99, 74, 0.7)',
-        }, {
-          offset: 0, color: 'rgba(253, 200, 106, 0.7)',
-        }], false),
-      },
-      'series.1.barWidth': 15,
-      'series.1.itemStyle.normal': {
-        barBorderRadius: 15,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 1, color: 'rgba(127, 128, 225, 0.7)',
-        }, {
-          offset: 0.9, color: 'rgba(72, 73, 181, 0.7)',
-        }, {
-          offset: 0.31, color: 'rgba(0, 208, 208, 0.7)',
-        }, {
-          offset: 0.15, color: 'rgba(0, 208, 208, 0.7)',
-        }, {
-          offset: 0, color: 'rgba(104, 253, 255, 0.7)',
-        }], false),
-      },
+      'series.0.barWidth': 10,
+      // 'series.0.itemStyle.normal.color': '#4ad2ff',
+      // 'series.1.itemStyle.normal.color': '#3DE7C9',
+      // 'series.0.itemStyle.normal': {
+      //   // barBorderRadius: [15, 15, 15, 15],
+      //   barBorderRadius: 15,
+      //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+      //     offset: 1, color: 'rgba(127, 128, 225, 0.7)',
+      //   }, {
+      //     offset: 0.9, color: 'rgba(72, 73, 181, 0.7)',
+      //   }, {
+      //     offset: 0.25, color: 'rgba(226, 99, 74, 0.7)',
+      //   }, {
+      //     offset: 0, color: 'rgba(253, 200, 106, 0.7)',
+      //   }], false),
+      // },
+      'series.1.barWidth': 10,
+      // 'series.1.itemStyle.normal': {
+      //   barBorderRadius: 15,
+      //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+      //     offset: 1, color: 'rgba(127, 128, 225, 0.7)',
+      //   }, {
+      //     offset: 0.9, color: 'rgba(72, 73, 181, 0.7)',
+      //   }, {
+      //     offset: 0.31, color: 'rgba(0, 208, 208, 0.7)',
+      //   }, {
+      //     offset: 0.15, color: 'rgba(0, 208, 208, 0.7)',
+      //   }, {
+      //     offset: 0, color: 'rgba(104, 253, 255, 0.7)',
+      //   }], false),
+      // },
     }
 
     return {
@@ -103,8 +105,9 @@ export default {
   position relative
   display inline-block
   box-sizing border-box
+  vertical-align top
   // background #78797a
-  width 70%
+  width 40%
   height 100%
   .chart-name
     position absolute

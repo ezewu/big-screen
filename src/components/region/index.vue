@@ -37,7 +37,7 @@ export default {
             value: 80,
           },
         ],
-        color: ['#ff96ad', '#7ff7d1', '#fcf19f', '#43b3ed', '#22a488'],
+        color: ['#333399', '#CCFFCC', '#663300', '#009999', '#CCCC33'],
       },
     }
   },

@@ -12,19 +12,22 @@
         </dv-border-box-1>
         <dv-border-box-3>
           <annual-transactions />
+
+          <capsule />
+
           <day-trading />
-        </dv-border-box-3>
-      </div>
+
+        </dv-border-box-3></div>
       <div class="bottom-wrapper">
         <dv-border-box-1>
           <sales-volume-two />
         </dv-border-box-1>
-        <dv-border-box-8 :dur="10">
+        <dv-border-box-8 :dur="30">
           <transaction-record />
         </dv-border-box-8>
-        <dv-border-box-13>
+        <dv-border-box-3>
           <region />
-        </dv-border-box-13>
+        </dv-border-box-3>
       </div>
     </div>
   </div>
@@ -39,6 +42,7 @@ export default {
     SalesVolumeOne: () => import('@@/sales-volume-one'),
     SalesVolumeTwo: () => import('@@/sales-volume-two'),
     AnnualTransactions: () => import('@@/annual-transactions'),
+    Capsule: () => import('@@/capsule'),
     DayTrading: () => import('@@/day-trading'),
     Region: () => import('@@/region'),
     TransactionRecord: () => import('@@/transaction-record'),
@@ -121,10 +125,9 @@ export default {
         height 100%
       .dv-border-box-3
         box-sizing border-box
-        padding 10px
+        padding 10px 15px
         width 82%
         height 100%
-        box-shadow: 0 0 10px rgb(150, 200, 255)
     .bottom-wrapper
       display flex
       height 420px
@@ -139,8 +142,8 @@ export default {
         padding 10px
         width 60%
         height 100%
-        box-shadow: 0 0 10px rgb(150, 200, 255)
-      .dv-border-box-13
+        // box-shadow: 0 0 10px rgb(150, 200, 255)
+      .dv-border-box-3
         display inline-block
         box-sizing border-box
         padding 10px

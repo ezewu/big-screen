@@ -1,7 +1,7 @@
 <template>
   <div id="digital-flop">
     <div v-for="item of digitalFlopData" :key="item.title" class="digital-flop-item">
-      <dv-border-box-13>
+      <div class="dv-border-box-13">
         <div class="icon-wrapper">
           <svg-icon :icon-class="item.icon" :style="{'color':item.color}" />
         </div>
@@ -13,7 +13,7 @@
             <div class="unit">{{ item.unit }}</div>
           </div>
         </div>
-      </dv-border-box-13>
+      </div>
     </div>
     <dv-decoration-10 />
   </div>
@@ -46,7 +46,7 @@ export default {
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#4d99fc',
+              fill: '#f8bc38',
               fontWeight: 'bold',
             },
           },
@@ -61,7 +61,7 @@ export default {
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#f46827',
+              fill: '#f8bc38',
               fontWeight: 'bold',
             },
           },
@@ -76,7 +76,7 @@ export default {
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#40faee',
+              fill: '#f8bc38',
               fontWeight: 'bold',
             },
           },
@@ -91,7 +91,7 @@ export default {
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#4d99fc',
+              fill: '#f8bc38',
               fontWeight: 'bold',
             },
           },
@@ -106,7 +106,7 @@ export default {
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#f46827',
+              fill: '#f8bc38',
               fontWeight: 'bold',
             },
           },
@@ -131,7 +131,6 @@ export default {
 #digital-flop
   position relative
   display flex
-  flex-shrink 0
   justify-content space-between
   align-items center
   overflow hidden
@@ -146,33 +145,31 @@ export default {
     padding 0 20px
     width 100%
     height 5px
-    opacity 0.5
+    opacity 0.6
   .digital-flop-item
     width 19%
     // box-shadow: 0 0 5px rgb(150, 200, 255)
-    background-color rgba(6, 30, 93, 0.4)
+    background-color rgba(10, 39, 50,0.8)
     .dv-border-box-13
-      box-sizing border-box
-      padding 25px
-      height 100px
-    >>>.border-box-content
       display flex
-      padding 0 10px
+      box-sizing border-box
+      padding 20px
+      height 100px
       .icon-wrapper
         flex 0 0 60px
         width 60px
         height 60px
         border-radius 50%
         background-color #072549
+        box-shadow 0 0 15px rgb(255, 255, 255)
         text-align center
         line-height 70px
-        box-shadow: 0 0 15px rgb(255, 255, 255)
         .svg-icon
           color #FFF
           font-size 38px
       .font-wrapper
         flex 1
-        margin-left 40px
+        margin-left 60px
         .digital-flop-title
           margin-top 6px
           color #eee

@@ -35,6 +35,7 @@ export default {
         ],
         rowNum: 4,
         waitTime: 5000,
+        unit: '元',
       },
     }
   },
@@ -53,4 +54,11 @@ export default {
   .dv-scroll-ranking-board
     margin-top 20px
     height 340px
+    >>>.ranking-column
+      border-bottom 2px solid rgba(200, 200, 200, 0.3)
+      .inside-column
+        height 6px
+        background-color #03a4d8
+    >>>.ranking-info .rank
+      color rgb(248, 188, 56)
 </style>

@@ -36,8 +36,10 @@ export default {
         rowNum: 8,
         index: true,
         headerBGC: '#002766',
-        // oddRowBGC: '#022a54',
-        // evenRowBGC: '#011932',
+        columnWidth: [70],
+        align: ['center'],
+        oddRowBGC: 'rgba(0, 59, 81, 0.4)',
+        evenRowBGC: 'rgba(10, 39, 50,0.3)',
       },
     }
   },
@@ -49,7 +51,7 @@ export default {
 .transaction-record-wrapper
   overflow hidden
   box-sizing border-box
-  padding-top 10px
+  padding-top 5px
   width 100%
   height 100%
   title()
@@ -57,5 +59,5 @@ export default {
   .dv-scroll-board
     box-sizing border-box
     // margin-bottom 60px
-    padding-top 10px
+    padding-top 5px
 </style>
