@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { postRequest } from 'common/utils/request'
 export default {
   data() {
     this.chartExtend = {
@@ -48,21 +49,26 @@ export default {
     return {
       chartData: {
         columns: ['日', '交易额', '交易量'],
-        rows: [
-          { '日': '1日', '交易额': 1393, '交易量': 1093 },
-          { '日': '2日', '交易额': 3530, '交易量': 3230 },
-          { '日': '3日', '交易额': 2923, '交易量': 2623 },
-          { '日': '4日', '交易额': 1723, '交易量': 1423 },
-          { '日': '5日', '交易额': 3792, '交易量': 3492 },
-          { '日': '6日', '交易额': 4593, '交易量': 4293 },
-          { '日': '7日', '交易额': 4593, '交易量': 4293 },
-          { '日': '8日', '交易额': 4593, '交易量': 4293 },
-          { '日': '9日', '交易额': 4593, '交易量': 4293 },
-          { '日': '10日', '交易额': 4593, '交易量': 4293 },
-
-        ],
+        rows: [],
       },
     }
+  },
+  created() {
+    this.postRequest()
+    const { postRequest } = this
+    setInterval(postRequest, 300000)
+  },
+  methods: {
+    postRequest() {
+      postRequest({ cmd: 'loadsalestenday' }).then(res => {
+        const dataArr = []
+        for (let i = 0; i < res.result.length; i++) {
+          const item = res.result[i]
+          dataArr.push({ '日': item.DAY, '交易额': item.JE, '交易量': item.WT })
+        }
+        this.chartData.rows = dataArr
+      })
+    },
   },
 }
 </script>

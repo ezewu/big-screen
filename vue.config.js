@@ -2,10 +2,18 @@ const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 
 module.exports = {
-  publicPath: '/',
+  publicPath: './',
   outputDir: 'dist',
-  assetsDir: 'static',
+  assetsDir: './static',
   productionSourceMap: false,
+  devServer: {
+    proxy: {
+      '^/ThirdSupport.ashx': {
+        target: 'http://61.136.223.57:8080',
+        changeOrigin: true,
+      },
+    },
+  },
   configureWebpack: {
     entry: {
       app: './src/main.js',

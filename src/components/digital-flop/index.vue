@@ -9,7 +9,7 @@
         <div class="font-wrapper">
           <div class="digital-flop-title">{{ item.title }}</div>
           <div class="digital-flop">
-            <dv-digital-flop :config="item.number" style="width:100px;height:50px;" />
+            <dv-digital-flop :config="item.number" />
             <div class="unit">{{ item.unit }}</div>
           </div>
         </div>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { postRequest } from 'common/utils/request'
+import { setInterval } from 'timers'
 export default {
   name: 'DigitalFlop',
   data() {
@@ -27,24 +29,26 @@ export default {
       digitalFlopData: [],
     }
   },
-  mounted() {
-    const { createData } = this
-
-    createData()
-
-    setInterval(createData, 30000)
+  created() {
+    this.postRequest()
+    const { postRequest } = this
+    setInterval(postRequest, 300000)
   },
   methods: {
-    createData() {
-      const { randomExtend } = this
-
+    postRequest() {
+      postRequest({ cmd: 'loadcountdaytotal' }).then(res => {
+        this.createData(res.result[0])
+      })
+    },
+    createData({ MARKETNUM, CUSNUM, JE, WT, CS }) {
       this.digitalFlopData = [
         {
           title: '菜场总数',
           number: {
-            number: [randomExtend(20000, 30000)],
+            number: [MARKETNUM],
             content: '{nt}',
             textAlign: 'right',
+            toFixed: 2,
             style: {
               fill: '#f8bc38',
               fontWeight: 'bold',
@@ -57,9 +61,10 @@ export default {
         {
           title: '商户总数',
           number: {
-            number: [randomExtend(20, 30)],
+            number: [CUSNUM],
             content: '{nt}',
             textAlign: 'right',
+            toFixed: 2,
             style: {
               fill: '#f8bc38',
               fontWeight: 'bold',
@@ -72,9 +77,10 @@ export default {
         {
           title: '日交易额',
           number: {
-            number: [randomExtend(20, 30)],
+            number: [JE],
             content: '{nt}',
             textAlign: 'right',
+            toFixed: 2,
             style: {
               fill: '#f8bc38',
               fontWeight: 'bold',
@@ -87,24 +93,26 @@ export default {
         {
           title: '日交易量',
           number: {
-            number: [randomExtend(10, 20)],
+            number: [WT],
             content: '{nt}',
             textAlign: 'right',
+            toFixed: 2,
             style: {
               fill: '#f8bc38',
               fontWeight: 'bold',
             },
           },
-          unit: '笔',
+          unit: 'kg',
           icon: 'trading_volume',
           color: '#daa13e',
         },
         {
           title: '日交易次数',
           number: {
-            number: [randomExtend(5, 10)],
+            number: [CS],
             content: '{nt}',
             textAlign: 'right',
+            toFixed: 2,
             style: {
               fill: '#f8bc38',
               fontWeight: 'bold',
@@ -115,13 +123,6 @@ export default {
           color: '#8868f1',
         },
       ]
-    },
-    randomExtend(minNum, maxNum) {
-      if (arguments.length === 1) {
-        return parseInt(Math.random() * minNum + 1, 10)
-      } else {
-        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10)
-      }
     },
   },
 }
@@ -149,7 +150,8 @@ export default {
   .digital-flop-item
     width 19%
     // box-shadow: 0 0 5px rgb(150, 200, 255)
-    background-color rgba(10, 39, 50,0.8)
+    background-color rgba(10, 39, 50, 0.8)
+    // box-shadow 0 7px 8px -8px rgba(255, 255, 255, 0.6)
     .dv-border-box-13
       display flex
       box-sizing border-box
@@ -169,17 +171,20 @@ export default {
           font-size 38px
       .font-wrapper
         flex 1
-        margin-left 60px
+        margin-left 40px
+        padding-left 10px
         .digital-flop-title
           margin-top 6px
           color #eee
           font-size 18px
         .digital-flop
           display flex
-        .unit
-          display flex
-          align-items flex-end
-          margin-left 10px
-          padding-bottom 13px
-          color #bbb
+          .dv-digital-flop
+            height 50px
+          .unit
+            display flex
+            align-items flex-end
+            margin-left 10px
+            padding-bottom 13px
+            color #bbb
 </style>

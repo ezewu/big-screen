@@ -11,35 +11,30 @@
 </template>
 
 <script>
+import { postRequest } from 'common/utils/request'
 export default {
   data() {
     return {
-      config: {
-        data: [
-          {
-            name: '西陵区',
-            value: 55,
-          },
-          {
-            name: '伍家岗区',
-            value: 120,
-          },
-          {
-            name: '猇亭区',
-            value: 78,
-          },
-          {
-            name: '点军区',
-            value: 66,
-          },
-          {
-            name: '夷陵区',
-            value: 80,
-          },
-        ],
-        color: ['#333399', '#CCFFCC', '#663300', '#009999', '#CCCC33'],
-      },
+      config: {},
     }
+  },
+  created() {
+    this.postRequest()
+  },
+  methods: {
+    postRequest() {
+      postRequest({ cmd: 'loadareaday' }).then(res => {
+        const dataArr = []
+        for (let i = 0; i < res.result.length; i++) {
+          const item = res.result[i]
+          dataArr.push({ name: item.NAME, value: Number(item.COUNT) })
+        }
+        this.config = {
+          data: dataArr,
+          color: ['#333399', '#CCFFCC', '#663300', '#009999', '#CCCC33'],
+        }
+      })
+    },
   },
 }
 </script>

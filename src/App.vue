@@ -1,35 +1,37 @@
 <template>
   <div id="app">
-    <top-header />
-    <div class="center-wrapper">
-      <digital-flop />
-    </div>
-
-    <div class="content-wrapper">
-      <div class="top-wrapper">
-        <dv-border-box-1>
-          <sales-volume-one />
-        </dv-border-box-1>
-        <dv-border-box-3>
-          <annual-transactions />
-
-          <capsule />
-
-          <day-trading />
-
-        </dv-border-box-3></div>
-      <div class="bottom-wrapper">
-        <dv-border-box-1>
-          <sales-volume-two />
-        </dv-border-box-1>
-        <dv-border-box-8 :dur="30">
-          <transaction-record />
-        </dv-border-box-8>
-        <dv-border-box-3>
-          <region />
-        </dv-border-box-3>
+    <vue-particle-line>
+      <top-header />
+      <div class="center-wrapper">
+        <digital-flop />
       </div>
-    </div>
+
+      <div class="content-wrapper">
+        <div class="top-wrapper">
+          <dv-border-box-1>
+            <sales-volume-one />
+          </dv-border-box-1>
+          <dv-border-box-3>
+            <annual-transactions />
+
+            <capsule />
+
+            <day-trading />
+
+          </dv-border-box-3></div>
+        <div class="bottom-wrapper">
+          <dv-border-box-1>
+            <sales-volume-two />
+          </dv-border-box-1>
+          <dv-border-box-8 :dur="30">
+            <transaction-record />
+          </dv-border-box-8>
+          <dv-border-box-3>
+            <region />
+          </dv-border-box-3>
+        </div>
+      </div>
+    </vue-particle-line>
   </div>
 </template>
 

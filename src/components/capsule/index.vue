@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { postRequest } from 'common/utils/request'
 export default {
   data() {
     this.chartExtend = {
@@ -22,23 +23,21 @@ export default {
         sort: 'ascending',
         label: {
           normal: {
-
             show: true,
-            formatter: '{a|{b}}\n{c|{c}kg}',
             rich: {
               a: {
                 color: 'rgba(222,240,255,1)',
                 fontSize: 15,
               },
               b: {
-                color: 'rgba(255,255,255,1)',
+                color: 'rgba(248, 188, 56,1)',
                 fontSize: 14,
               },
             },
-            // formatter: (params) => {
-            //   const { data: { name, realValue }} = params
-            //   return `${name}\n  ${realValue}kg`
-            // },
+            formatter: (params) => {
+              const { data: { name, realValue }} = params
+              return `{a|${name}}\n {b|${realValue.toFixed(1)}kg}`
+            },
             position: 'right',
             textStyle: {
               fontSize: '15',
@@ -50,14 +49,27 @@ export default {
     return {
       chartData: {
         columns: ['菜名', '数值'],
-        rows: [
-          { '菜名': '白菜', '数值': 900 },
-          { '菜名': '萝卜', '数值': 600 },
-          { '菜名': '四季豆', '数值': 300 },
-          { '菜名': '黄瓜', '数值': 1200 },
-        ],
+        rows: [],
       },
     }
+  },
+  created() {
+    this.postRequest()
+    const { postRequest } = this
+    setInterval(postRequest, 300000)
+  },
+  methods: {
+    postRequest() {
+      postRequest({ cmd: 'loadsalesdaytopvage' }).then(res => {
+        const dataArr = []
+        const arr = res.result.slice(0, 6)
+        for (let i = 0; i < arr.length; i++) {
+          const item = arr[i]
+          dataArr.push({ '菜名': item.SP_NM, '数值': Number(item.OUT_WT) })
+        }
+        this.chartData.rows = dataArr
+      })
+    },
   },
 }
 </script>

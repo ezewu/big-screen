@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import echarts from 'echarts/lib/echarts'
+import { postRequest } from 'common/utils/request'
 export default {
   data() {
     this.chartExtend = {
@@ -80,23 +80,26 @@ export default {
     return {
       chartData: {
         columns: ['月', '交易额', '交易量'],
-        rows: [
-          { '月': '1月', '交易额': 1393, '交易量': 1093 },
-          { '月': '2月', '交易额': 3530, '交易量': 3230 },
-          { '月': '3月', '交易额': 2923, '交易量': 2623 },
-          { '月': '4月', '交易额': 1723, '交易量': 1423 },
-          { '月': '5月', '交易额': 3792, '交易量': 3492 },
-          { '月': '6月', '交易额': 4593, '交易量': 4293 },
-          { '月': '7月', '交易额': 4593, '交易量': 4293 },
-          { '月': '8月', '交易额': 4593, '交易量': 4293 },
-          { '月': '9月', '交易额': 4593, '交易量': 4293 },
-          { '月': '10月', '交易额': 4593, '交易量': 4293 },
-          { '月': '11月', '交易额': 4593, '交易量': 4293 },
-          { '月': '12月', '交易额': 4593, '交易量': 4293 },
-        ],
+        rows: [],
       },
-
     }
+  },
+  created() {
+    this.postRequest()
+    const { postRequest } = this
+    setInterval(postRequest, 300000)
+  },
+  methods: {
+    postRequest() {
+      postRequest({ cmd: 'loadsalesyear' }).then(res => {
+        const dataArr = []
+        for (let i = 0; i < res.result.length; i++) {
+          const item = res.result[i]
+          dataArr.push({ '月': item.MONTH, '交易额': item.JE, '交易量': item.WT })
+        }
+        this.chartData.rows = dataArr
+      })
+    },
   },
 }
 </script>

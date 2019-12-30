@@ -6,38 +6,35 @@
 </template>
 
 <script>
+import { postRequest } from 'common/utils/request'
 export default {
   name: 'SalesVolume',
   data() {
     return {
-      config: {
-        data: [
-          {
-            name: '葛洲坝菜市场',
-            value: 55,
-          },
-          {
-            name: '七里冲菜市场',
-            value: 120,
-          },
-          {
-            name: '南苑菜市场',
-            value: 78,
-          },
-          {
-            name: '北门菜市场',
-            value: 66,
-          },
-          {
-            name: '东门菜市场',
-            value: 80,
-          },
-        ],
-        rowNum: 4,
-        waitTime: 5000,
-        unit: '元',
-      },
+      config: {},
     }
+  },
+  created() {
+    this.postRequest()
+    const { postRequest } = this
+    setInterval(postRequest, 300000)
+  },
+  methods: {
+    postRequest() {
+      postRequest({ cmd: 'loadsalesdaytopje' }).then(res => {
+        const dataArr = []
+        for (let i = 0; i < res.result.length; i++) {
+          const item = res.result[i]
+          dataArr.push({ name: item.NAME, value: item.JE })
+        }
+        this.config = {
+          data: dataArr,
+          rowNum: 4,
+          waitTime: 5000,
+          unit: '元',
+        }
+      })
+    },
   },
 }
 </script>
