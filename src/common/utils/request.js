@@ -2,6 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 const service = axios.create({
+  // baseURL: '/ThirdSupport.ashx',
   baseURL: 'http://61.136.223.57:8080/ThirdSupport.ashx',
   timeout: 5000,
 })

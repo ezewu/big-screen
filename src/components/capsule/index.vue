@@ -4,7 +4,11 @@
       蔬菜销量排行榜
       <dv-decoration-3 style="width:200px;height:20px;" />
     </div>
-    <ve-funnel class="funnel" :data="chartData" :extend="chartExtend" />
+    <ve-funnel
+      class="funnel"
+      :data="chartData"
+      :extend="chartExtend"
+    />
   </div>
 </template>
 
@@ -17,39 +21,74 @@ export default {
         show: false,
       },
       series: {
-        gap: 10,
-        minSize: 20,
-        maxSize: 300,
+        type: 'funnel',
+        left: '10%',
+        width: '80%',
+        gap: 16,
+        minSize: 150,
         sort: 'ascending',
+        maxSize: 410,
         label: {
-          normal: {
-            show: true,
-            rich: {
-              a: {
-                color: 'rgba(222,240,255,1)',
-                fontSize: 15,
-              },
-              b: {
-                color: 'rgba(248, 188, 56,1)',
-                fontSize: 14,
-              },
+          show: true,
+          position: 'inside',
+          rich: {
+            a: {
+              color: 'rgba(222,240,255,1)',
+              fontSize: 15,
             },
-            formatter: (params) => {
-              const { data: { name, realValue }} = params
-              return `{a|${name}}\n {b|${realValue.toFixed(1)}kg}`
+            b: {
+              color: 'rgba(255, 255, 255,1)',
+              fontSize: 14,
             },
-            position: 'right',
-            textStyle: {
-              fontSize: '15',
-            },
+          },
+          formatter: (params) => {
+            const { data: { realValue }} = params
+            const strArr = realValue.split('|')
+            return `{a|${strArr[0]}}  {b|${Number(strArr[1]).toFixed(1)} kg}`
           },
         },
       },
+      // series: {
+      //   gap: 10,
+      //   minSize: 20,
+      //   maxSize: 300,
+      //   sort: 'ascending',
+      //   label: {
+      //     normal: {
+      //       show: true,
+      //       rich: {
+      //         a: {
+      //           color: 'rgba(222,240,255,1)',
+      //           fontSize: 15,
+      //         },
+      //         b: {
+      //           color: 'rgba(248, 188, 56,1)',
+      //           fontSize: 14,
+      //         },
+      //       },
+      //       formatter: (params) => {
+      //         const { data: { name, realValue }} = params
+      //         return `{a|${name}}\n {b|${realValue.toFixed(1)}kg}`
+      //       },
+      //       position: 'right',
+      //       textStyle: {
+      //         fontSize: '15',
+      //       },
+      //     },
+      //   },
+      // },
     }
     return {
       chartData: {
-        columns: ['菜名', '数值'],
-        rows: [],
+        columns: ['order', '菜名'],
+        rows: [
+          // { order: 10, '菜名': '白菜|235' },
+          // { order: 20, '菜名': '白萝卜|500' },
+          // { order: 30, '菜名': '胡萝卜|87' },
+          // { order: 40, '菜名': '西红柿|81' },
+          // { order: 50, '菜名': '莴笋| 64' },
+          // { order: 60, '菜名': '苦瓜|62' },
+        ],
       },
     }
   },
@@ -65,9 +104,10 @@ export default {
         const arr = res.result.slice(0, 6)
         for (let i = 0; i < arr.length; i++) {
           const item = arr[i]
-          dataArr.push({ '菜名': item.SP_NM, '数值': Number(item.OUT_WT) })
+          dataArr.push({ order: 10 + i, '菜名': `${item.SP_NM}|${item.OUT_WT}` })
         }
         this.chartData.rows = dataArr
+        console.log(dataArr)
       })
     },
   },
